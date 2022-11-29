@@ -28,19 +28,54 @@
         </div>
       </nav>
     <div><h1> </h1></div>
+
+    <!-- 본문 구간 -->
     <div class="container text-center">
-        
-        <div class="row">
+        <!-- 진료/검사일정 -->
+        <div class="row p-3">
           <div class="col-lg-auto">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 24rem;">
                 <div class="card-header">
                   진료/검사일정
                 </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">An item</li>
-                  <li class="list-group-item">A second item</li>
-                  <li class="list-group-item">A third item</li>
-                </ul>
+                <div class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        2022-11-29 (화) 10:50 소화기내과 최인규
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <strong>This is the second item's accordion body.</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        2022-11-29 (화) 16:50 소화기내과 최인규
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <strong>This is the second item's accordion body.</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        2022-11-30 (수) 10:50 소화기내과 최인규
+                      </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <strong>This is the third item's accordion body.</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
           </div>
           <div class="col">
@@ -67,8 +102,11 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+
+        
+        <div class="row gap-3">
+          <!-- 나의 입원정보 -->
+          <div class="col p-3">
             <div class="card">
                 <h5 class="card-header">나의 입원 정보</h5>
                 <div class="card-body">
@@ -78,7 +116,9 @@
                 </div>
               </div>
           </div>
-          <div class="col">
+
+          <!-- 오늘의 식단 -->
+          <div class="col p-3">
             <div class="card">
                 <h5 class="card-header">오늘의 식단</h5>
                 <div class="card-body">
@@ -88,7 +128,9 @@
                 </div>
               </div>
           </div>
-          <div class="col">
+
+          <!-- 시설 안내 -->
+          <div class="col p-3">
             <div class="card">
                 <h5 class="card-header">시설 안내</h5>
                 <div class="card-body">
@@ -99,19 +141,21 @@
               </div>
           </div>
         </div>
+
+        <!-- 버튼 그룹 -->
         <div class="row">
-            <div class="col">
-                <div class="d-grid gap-2">
+            <div class="col gap-3">
+                <div class="d-grid p-3">
                     <button type="button" class="btn btn-info btn-lg">전화</button>
                 </div>
             </div>
-            <div class="col">
-                <div class="d-grid gap-2">
+            <div class="col gap-3">
+                <div class="d-grid p-3">
                     <button type="button" class="btn btn-primary btn-lg">호출</button>
                 </div>
             </div>
-            <div class="col">
-                <div class="d-grid gap-2">
+            <div class="col gap-3">
+                <div class="d-grid p-3">
                     <button type="button" class="btn btn-info btn-lg">비상</button>
                 </div>
             </div>
