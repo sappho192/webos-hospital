@@ -1,0 +1,13 @@
+{
+    "id": "com.inhadsp.smarthospital",
+    "version": "0.0.1",
+    "vendor": "Taein Kim",
+    "type": "web",
+    "main": "index.html",
+    "title": "Smart Hospital",
+    "icon": "icon.png",
+    "requiredPermissions": [
+      "time.query",
+      "activity.operation"
+    ]
+  }
