@@ -6,6 +6,8 @@
     <title>스마트진료</title>
     <link href="./css/bootstrap.css" rel="stylesheet">
     <link href="./css/vanillaCalendar.css" rel="stylesheet">
+    <link href="./css/fontawesome.css" rel="stylesheet">
+    <link href="./css/solid.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
@@ -327,7 +329,7 @@
         <div class="row">
             <div class="col gap-3">
                 <div class="d-grid p-3">
-                    <button type="button" class="btn btn-info btn-lg">편의 요청</button>
+                    <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#modalCallAid">편의 요청</button>
                 </div>
             </div>
             <div class="col gap-3">
@@ -340,7 +342,79 @@
                     <button type="button" class="btn btn-info btn-lg">간편 연락</button>
                 </div>
             </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modalCallAid" tabindex="-1" aria-labelledby="modalCallAidLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalCallAidLabel">편의 요청</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="container text-center gap-3 p-3">
+                  <div class="row">
+                    <div class="col">
+                      <button type="button" id="btnToiletMove" class="btn btn-primary p-3">
+                        <i class="fa-solid fa-restroom fa-8x"></i><br/>화장실 이동
+                      </button>
+                    </div>
+                    <div class="col">
+                      <button type="button" id="btnWater" class="btn btn-primary p-3">
+                        <i class="fa-solid fa-bottle-water fa-8x"></i><br/>식수 요청
+                      </button>
+                    </div>
+                    <div class="col">
+                      <button type="button" id="btnToiletAid" class="btn btn-primary p-3">
+                        <i class="fa-solid fa-toilet fa-8x"></i><br/>배변 보조
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
+                  <div id="liveToastToiletMove" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <img src="icon.png" class="rounded me-2" alt="...">
+                      <strong class="me-auto">알림</strong>
+                      <small>0초 전</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      화장실 이동 요청이 접수되었습니다.
+                    </div>
+                  </div>
+
+                  <div id="liveToastWater" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <img src="icon.png" class="rounded me-2" alt="...">
+                      <strong class="me-auto">알림</strong>
+                      <small>0초 전</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      식수 요청이 접수되었습니다.
+                    </div>
+                  </div>
+
+                  <div id="liveToastToiletAid" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <img src="icon.png" class="rounded me-2" alt="...">
+                      <strong class="me-auto">알림</strong>
+                      <small>0초 전</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      배변 보조 요청이 접수되었습니다.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+              </div>
+            </div>
           </div>
+        </div>
     </div>
     <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.bundle.js"></script>
@@ -349,6 +423,37 @@
       window.addEventListener('load', function () {
         vanillaCalendar.init();
       })
-      </script>
+    </script>
+    <script>
+      const toastTriggerToiletMove = document.getElementById('btnToiletMove')
+      const toastToiletMove = document.getElementById('liveToastToiletMove')
+      if (toastTriggerToiletMove) {
+        toastTriggerToiletMove.addEventListener('click', () => {
+          const toast = new bootstrap.Toast(toastToiletMove)
+
+          toast.show()
+        })
+      }
+
+      const toastTriggerWater = document.getElementById('btnWater')
+      const toastWater = document.getElementById('liveToastWater')
+      if (toastTriggerWater) {
+        toastTriggerWater.addEventListener('click', () => {
+          const toast = new bootstrap.Toast(toastWater)
+
+          toast.show()
+        })
+      }
+
+      const toastTriggerToiletAid = document.getElementById('btnToiletAid')
+      const toastToiletAid = document.getElementById('liveToastToiletAid')
+      if (toastTriggerToiletAid) {
+        toastTriggerToiletAid.addEventListener('click', () => {
+          const toast = new bootstrap.Toast(toastToiletAid)
+
+          toast.show()
+        })
+      }
+    </script>
   </body>
 </html>
