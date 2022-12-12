@@ -329,7 +329,7 @@
         <div class="row">
             <div class="col gap-3">
                 <div class="d-grid p-3">
-                    <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#modalCallAid">편의 요청</button>
+                    <button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#modalCallAid">편의 요청 [1]</button>
                 </div>
             </div>
             <div class="col gap-3">
@@ -356,17 +356,17 @@
                   <div class="row">
                     <div class="col">
                       <button type="button" id="btnToiletMove" class="btn btn-primary p-3">
-                        <i class="fa-solid fa-restroom fa-8x"></i><br/>화장실 이동
+                        <i class="fa-solid fa-restroom fa-8x"></i><br/>화장실 이동 [Q]
                       </button>
                     </div>
                     <div class="col">
                       <button type="button" id="btnWater" class="btn btn-primary p-3">
-                        <i class="fa-solid fa-bottle-water fa-8x"></i><br/>식수 요청
+                        <i class="fa-solid fa-bottle-water fa-8x"></i><br/>식수 요청 [W]
                       </button>
                     </div>
                     <div class="col">
                       <button type="button" id="btnToiletAid" class="btn btn-primary p-3">
-                        <i class="fa-solid fa-toilet fa-8x"></i><br/>배변 보조
+                        <i class="fa-solid fa-toilet fa-8x"></i><br/>배변 보조 [E]
                       </button>
                     </div>
                   </div>
@@ -412,7 +412,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기 [ESC]</button>
               </div>
             </div>
           </div>
@@ -468,16 +468,16 @@
         isActive = false
       }) // 모달이 닫히면 isActive를 false로 바꿔줌
       document.addEventListener('keydown', function (event) {
-        if (event.key === 'q') {
+        if (event.key === '1' || event.key === '!') {
           if (isActive) {
             return
           }
           const modal = new bootstrap.Modal(document.getElementById('modalCallAid'))
           isActive = true
           modal.show()
-        } else if (event.key === 'w') {
+        } else if (event.key === '2' || event.key === '@') {
           
-        } else if (event.key === 'e') {
+        } else if (event.key === '3' || event.key === '#') {
         }
       })
     </script>
@@ -485,15 +485,15 @@
     <!-- 키보드로 편의 버튼들 동작시키는 코드 -->
     <script>
       document.addEventListener('keydown', function (event) {
-        if (event.key === '1') {
+        if (event.key === 'q' || event.key === 'Q') {
           const toast = new bootstrap.Toast(toastToiletMove)
 
           toast.show()
-        } else if (event.key === '2') {
+        } else if (event.key === 'w' || event.key === 'W') {
           const toast = new bootstrap.Toast(toastWater)
 
           toast.show()
-        } else if (event.key === '3') {
+        } else if (event.key === 'e' || event.key === 'E') {
           const toast = new bootstrap.Toast(toastToiletAid)
 
           toast.show()
