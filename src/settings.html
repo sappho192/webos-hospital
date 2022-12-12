@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>스마트진료</title>
     <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/video.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
@@ -28,7 +29,13 @@
       </nav>
     <div><h1> </h1></div>
 
-    <div class="card">
+    <div class="booth">
+        <video id="video" width="1280" height="720" autoplay=""></video>
+        <canvas id="canvas" width="1280" height="720"></canvas>
+    </div>
+    <script src="./js/video.js"></script>
+
+    <div class="card" hidden>
         <h5 class="card-header">Debug - REST API with JSON</h5>
         <div class="card-body">
           <h5 class="card-title">DietMenu</h5>

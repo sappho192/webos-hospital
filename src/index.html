@@ -8,6 +8,7 @@
     <link href="./css/vanillaCalendar.css" rel="stylesheet">
     <link href="./css/fontawesome.css" rel="stylesheet">
     <link href="./css/solid.css" rel="stylesheet">
+    <link href="./css/video.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
@@ -352,7 +353,7 @@
             </div>
             <div class="col gap-3">
                 <div class="d-grid p-3">
-                    <button type="button" class="btn btn-danger btn-lg" id="btEmergencyCall">긴급 호출 [2]</button>
+                    <button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#modalCallEmergency">긴급 호출 [2]</button>
                 </div>
             </div>
             <div class="col gap-3">
@@ -362,16 +363,22 @@
             </div>
         </div>
         <!-- 긴급 호출 Modal-->
-        <div class="toast-container top-50 start-50 translate-middle p-3">
-          <div id="liveToastEmergencyCall" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
-            <div class="toast-header">
-              <img src="icon.png" class="rounded me-2" alt="...">
-              <strong class="me-auto">스마트진료</strong>
-              <small>지금</small>
-              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-              긴급 호출이 완료되었습니다.
+        <div class="modal fade" id="modalCallEmergency" tabindex="-1" aria-labelledby="modalCallEmergencyLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalCallEmergencyLabel">긴급 호출</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="booth">
+                  <video id="video" width="100%" autoplay=""></video>
+                  <canvas id="canvas" width="100%"></canvas>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기 [ESC]</button>
+              </div>
             </div>
           </div>
         </div>
@@ -530,6 +537,7 @@
     <script src="./js/bootstrap.bundle.js"></script>
     <script src="./js/vanillaCalendar.js" type="text/javascript"></script>
     <script src="./js/moment-with-locales.min.js" type="text/javascript"></script>
+    <script src="./js/video.js"></script>
     <script>
       window.addEventListener('load', function () {
         vanillaCalendar.init();
@@ -611,8 +619,8 @@
 
     <!-- 키보드로 편의 요청, 호출, 간편 연락 Modal을 대신 띄워주는 코드 -->
     <script>
-      modalNum = 0
-      isActive = false
+      var modalNum = 0
+      var isActive = false
       var modalCallAid = document.getElementById('modalCallAid')
       modalCallAid.addEventListener('hidden.bs.modal', function () {
         isActive = false
@@ -623,8 +631,10 @@
         isActive = false
         modalNum = 0
       }) // 모달이 닫히면 isActive를 false로 바꿔줌
-      var toastCall = document.getElementById('liveToastEmergencyCall')
-      toastCall.addEventListener('hidden.bs.toast', function () {
+      var toastCall = document.getElementById('modalCallEmergency')
+      modalCallEmergency.addEventListener('hidden.bs.modal', function () {
+        var video = document.getElementById('video')
+        video.pause()
         isActive = false
         modalNum = 0
       }) // 모달이 닫히면 isActive를 false로 바꿔줌
@@ -642,11 +652,12 @@
           if (isActive) {
             return
           }
-          const toast = document.getElementById('liveToastEmergencyCall')
-          const bsEmergencyCall = new bootstrap.Toast(toast)
+          const modal = new bootstrap.Modal(document.getElementById('modalCallEmergency'))
+          var video = document.getElementById('video')
+          video.play()
           isActive = true
           modalNum = 2
-          bsEmergencyCall.show()
+          modal.show()
         } else if (event.key === '3' || event.key === '#') {
           if (isActive) {
             return
