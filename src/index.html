@@ -459,5 +459,46 @@
         })
       }
     </script>
+
+    <!-- 키보드로 편의 요청, 호출, 간편 연락 Modal을 대신 띄워주는 코드 -->
+    <script>
+      isActive = false
+      var modalCallAid = document.getElementById('modalCallAid')
+      modalCallAid.addEventListener('hidden.bs.modal', function () {
+        isActive = false
+      }) // 모달이 닫히면 isActive를 false로 바꿔줌
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'q') {
+          if (isActive) {
+            return
+          }
+          const modal = new bootstrap.Modal(document.getElementById('modalCallAid'))
+          isActive = true
+          modal.show()
+        } else if (event.key === 'w') {
+          
+        } else if (event.key === 'e') {
+        }
+      })
+    </script>
+
+    <!-- 키보드로 편의 버튼들 동작시키는 코드 -->
+    <script>
+      document.addEventListener('keydown', function (event) {
+        if (event.key === '1') {
+          const toast = new bootstrap.Toast(toastToiletMove)
+
+          toast.show()
+        } else if (event.key === '2') {
+          const toast = new bootstrap.Toast(toastWater)
+
+          toast.show()
+        } else if (event.key === '3') {
+          const toast = new bootstrap.Toast(toastToiletAid)
+
+          toast.show()
+        }
+      })
+    </script>
   </body>
 </html>
