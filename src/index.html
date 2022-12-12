@@ -352,7 +352,7 @@
             </div>
             <div class="col gap-3">
                 <div class="d-grid p-3">
-                    <button type="button" class="btn btn-danger btn-lg">긴급 호출 [2]</button>
+                    <button type="button" class="btn btn-danger btn-lg" id="btEmergencyCall">긴급 호출 [2]</button>
                 </div>
             </div>
             <div class="col gap-3">
@@ -361,6 +361,21 @@
                 </div>
             </div>
         </div>
+        <!-- 긴급 호출 Modal-->
+        <div class="toast-container top-50 start-50 translate-middle p-3">
+          <div id="liveToastEmergencyCall" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+            <div class="toast-header">
+              <img src="icon.png" class="rounded me-2" alt="...">
+              <strong class="me-auto">스마트진료</strong>
+              <small>지금</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              긴급 호출이 완료되었습니다.
+            </div>
+          </div>
+        </div>
+
         <!-- 편의요청 Modal -->
         <div class="modal fade" id="modalCallAid" tabindex="-1" aria-labelledby="modalCallAidLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -392,7 +407,7 @@
 
                 <!-- Toast들 -->
                 <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
-                  <div id="liveToastToiletMove" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div id="liveToastToiletMove" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                     <div class="toast-header">
                       <img src="icon.png" class="rounded me-2" alt="...">
                       <strong class="me-auto">알림</strong>
@@ -404,7 +419,7 @@
                     </div>
                   </div>
 
-                  <div id="liveToastWater" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div id="liveToastWater" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                     <div class="toast-header">
                       <img src="icon.png" class="rounded me-2" alt="...">
                       <strong class="me-auto">알림</strong>
@@ -416,7 +431,7 @@
                     </div>
                   </div>
 
-                  <div id="liveToastToiletAid" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div id="liveToastToiletAid" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                     <div class="toast-header">
                       <img src="icon.png" class="rounded me-2" alt="...">
                       <strong class="me-auto">알림</strong>
@@ -467,7 +482,7 @@
 
                 <!-- Toast들 -->
                 <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
-                  <div id="liveToastCallParent" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div id="liveToastCallParent" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                     <div class="toast-header">
                       <img src="icon.png" class="rounded me-2" alt="...">
                       <strong class="me-auto">알림</strong>
@@ -479,7 +494,7 @@
                     </div>
                   </div>
 
-                  <div id="liveToastCallFriend" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div id="liveToastCallFriend" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                     <div class="toast-header">
                       <img src="icon.png" class="rounded me-2" alt="...">
                       <strong class="me-auto">알림</strong>
@@ -491,7 +506,7 @@
                     </div>
                   </div>
 
-                  <div id="liveToastCallFront" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div id="liveToastCallFront" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                     <div class="toast-header">
                       <img src="icon.png" class="rounded me-2" alt="...">
                       <strong class="me-auto">알림</strong>
@@ -523,6 +538,16 @@
 
     <!-- Toast띄우는 동작 구현 -->
     <script>
+      const toastTriggerEmergencyCall = document.getElementById('btEmergencyCall')
+      const toastEmergencyCall = document.getElementById('liveToastEmergencyCall')
+      if (toastTriggerEmergencyCall) {
+        toastTriggerEmergencyCall.addEventListener('click', () => {
+          const toast = new bootstrap.Toast(toastEmergencyCall)
+
+          toast.show()
+        })
+      }
+
       const toastTriggerToiletMove = document.getElementById('btnToiletMove')
       const toastToiletMove = document.getElementById('liveToastToiletMove')
       if (toastTriggerToiletMove) {
@@ -598,6 +623,11 @@
         isActive = false
         modalNum = 0
       }) // 모달이 닫히면 isActive를 false로 바꿔줌
+      var toastCall = document.getElementById('liveToastEmergencyCall')
+      toastCall.addEventListener('hidden.bs.toast', function () {
+        isActive = false
+        modalNum = 0
+      }) // 모달이 닫히면 isActive를 false로 바꿔줌
 
       document.addEventListener('keydown', function (event) {
         if (event.key === '1' || event.key === '!') {
@@ -609,6 +639,14 @@
           modalNum = 1
           modal.show()
         } else if (event.key === '2' || event.key === '@') {
+          if (isActive) {
+            return
+          }
+          const toast = document.getElementById('liveToastEmergencyCall')
+          const bsEmergencyCall = new bootstrap.Toast(toast)
+          isActive = true
+          modalNum = 2
+          bsEmergencyCall.show()
         } else if (event.key === '3' || event.key === '#') {
           if (isActive) {
             return
