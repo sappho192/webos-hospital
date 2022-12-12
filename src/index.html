@@ -371,6 +371,8 @@
                     </div>
                   </div>
                 </div>
+
+                <!-- Toast들 -->
                 <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
                   <div id="liveToastToiletMove" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
@@ -424,6 +426,8 @@
         vanillaCalendar.init();
       })
     </script>
+
+    <!-- Toast띄우는 동작 구현 -->
     <script>
       const toastTriggerToiletMove = document.getElementById('btnToiletMove')
       const toastToiletMove = document.getElementById('liveToastToiletMove')
