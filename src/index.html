@@ -343,7 +343,7 @@
                 </div>
             </div>
         </div>
-        <!-- Modal -->
+        <!-- 편의요청 Modal -->
         <div class="modal fade" id="modalCallAid" tabindex="-1" aria-labelledby="modalCallAidLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -417,6 +417,81 @@
             </div>
           </div>
         </div>
+
+        <!-- 간편연락 Modal -->
+        <div class="modal fade" id="modalCallContact" tabindex="-1" aria-labelledby="modalCallContactLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalCallContactLabel">간편 연락</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="container text-center gap-3 p-3">
+                  <div class="row">
+                    <div class="col">
+                      <button type="button" id="btnCallParent" class="btn btn-primary p-3">
+                        <i class="fa-solid fa-person-breastfeeding fa-8x"></i><br/>보호자 [Q]
+                      </button>
+                    </div>
+                    <div class="col">
+                      <button type="button" id="btnWater" class="btn btn-primary p-3">
+                        <i class="fa-solid fa-user-group fa-8x"></i><br/>친구 1 [W]
+                      </button>
+                    </div>
+                    <div class="col">
+                      <button type="button" id="btnToiletAid" class="btn btn-primary p-3">
+                        <i class="fa-solid fa-user-nurse fa-8x"></i><br/>병원 데스크 [E]
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Toast들 -->
+                <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
+                  <div id="liveToastCallParent" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <img src="icon.png" class="rounded me-2" alt="...">
+                      <strong class="me-auto">알림</strong>
+                      <small>0초 전</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      보호자에게 연락이 접수되었습니다.
+                    </div>
+                  </div>
+
+                  <div id="liveToastCallFriend" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <img src="icon.png" class="rounded me-2" alt="...">
+                      <strong class="me-auto">알림</strong>
+                      <small>0초 전</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      친구에게 연락이 접수되었습니다.
+                    </div>
+                  </div>
+
+                  <div id="liveToastCallFront" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <img src="icon.png" class="rounded me-2" alt="...">
+                      <strong class="me-auto">알림</strong>
+                      <small>0초 전</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      병원 데스크에 연락이 접수되었습니다.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기 [ESC]</button>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
     <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.bundle.js"></script>
@@ -458,15 +533,53 @@
           toast.show()
         })
       }
+
+      const toastTriggerCallParent = document.getElementById('btnCallParent')
+      const toastCallParent = document.getElementById('liveToastCallParent')
+      if (toastTriggerCallParent) {
+        toastTriggerCallParent.addEventListener('click', () => {
+          const toast = new bootstrap.Toast(toastCallParent)
+
+          toast.show()
+        })
+      }
+
+      const toastTriggerCallFriend = document.getElementById('btnCallFriend')
+      const toastCallFriend = document.getElementById('liveToastCallFriend')
+      if (toastTriggerCallFriend) {
+        toastTriggerCallFriend.addEventListener('click', () => {
+          const toast = new bootstrap.Toast(toastCallFriend)
+
+          toast.show()
+        })
+      }
+
+      const toastTriggerCallFront = document.getElementById('btnCallFront')
+      const toastCallFront = document.getElementById('liveToastCallFront')
+      if (toastTriggerCallFront) {
+        toastTriggerCallFront.addEventListener('click', () => {
+          const toast = new bootstrap.Toast(toastCallFront)
+
+          toast.show()
+        })
+      }
     </script>
 
     <!-- 키보드로 편의 요청, 호출, 간편 연락 Modal을 대신 띄워주는 코드 -->
     <script>
+      modalNum = 0
       isActive = false
       var modalCallAid = document.getElementById('modalCallAid')
       modalCallAid.addEventListener('hidden.bs.modal', function () {
         isActive = false
+        modalNum = 0
       }) // 모달이 닫히면 isActive를 false로 바꿔줌
+      var modalCallContact = document.getElementById('modalCallContact')
+      modalCallContact.addEventListener('hidden.bs.modal', function () {
+        isActive = false
+        modalNum = 0
+      }) // 모달이 닫히면 isActive를 false로 바꿔줌
+
       document.addEventListener('keydown', function (event) {
         if (event.key === '1' || event.key === '!') {
           if (isActive) {
@@ -474,10 +587,17 @@
           }
           const modal = new bootstrap.Modal(document.getElementById('modalCallAid'))
           isActive = true
+          modalNum = 1
           modal.show()
         } else if (event.key === '2' || event.key === '@') {
-          
         } else if (event.key === '3' || event.key === '#') {
+          if (isActive) {
+            return
+          }
+          const modal = new bootstrap.Modal(document.getElementById('modalCallContact'))
+          isActive = true
+          modalNum = 3
+          modal.show()
         }
       })
     </script>
@@ -486,17 +606,32 @@
     <script>
       document.addEventListener('keydown', function (event) {
         if (event.key === 'q' || event.key === 'Q') {
-          const toast = new bootstrap.Toast(toastToiletMove)
-
-          toast.show()
+          if(modalNum === 1) {
+            const toast = new bootstrap.Toast(toastToiletMove)
+            toast.show()
+          }
+          else if(modalNum === 3) {
+            const toast = new bootstrap.Toast(toastCallParent)
+            toast.show()
+          }          
         } else if (event.key === 'w' || event.key === 'W') {
-          const toast = new bootstrap.Toast(toastWater)
-
-          toast.show()
+          if(modalNum === 1) {
+            const toast = new bootstrap.Toast(toastWater)
+            toast.show()
+          }
+          else if(modalNum === 3) {
+            const toast = new bootstrap.Toast(toastCallFriend)
+            toast.show()
+          }
         } else if (event.key === 'e' || event.key === 'E') {
-          const toast = new bootstrap.Toast(toastToiletAid)
-
-          toast.show()
+          if(modalNum === 1) {
+            const toast = new bootstrap.Toast(toastToiletAid)
+            toast.show()
+          }
+          else if(modalNum === 3) {
+            const toast = new bootstrap.Toast(toastCallFront)
+            toast.show()
+          }
         }
       })
     </script>
