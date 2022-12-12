@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>스마트진료</title>
     <link href="./css/bootstrap.css" rel="stylesheet">
-    <link href="./css/vanillaCalendar.css" rel="stylesheet">
-    <link href="./css/fontawesome.css" rel="stylesheet">
-    <link href="./css/solid.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
@@ -31,6 +28,107 @@
       </nav>
     <div><h1> </h1></div>
 
+    <div class="card">
+        <h5 class="card-header">Debug - REST API with JSON</h5>
+        <div class="card-body">
+          <h5 class="card-title">DietMenu</h5>
+          <p class="card-text" id="debugDietMenu">debug message goes here.</p>
+          <p class="card-text" id="debugDietMenu2"></p>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">MedMenu</h5>
+            <p class="card-text" id="debugMedMenu">debug message goes here.</p>
+            <p class="card-text" id="debugMedMenu2"></p>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Alarm</h5>
+            <p class="card-text" id="debugAlarm">debug message goes here.</p>
+            <p class="card-text" id="debugAlarm2"></p>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Schedule</h5>
+            <p class="card-text" id="debugSchedule">debug message goes here.</p>
+            <p class="card-text" id="debugSchedule2"></p>
+        </div>
+      </div>
 
+    <script>
+        function parseDietMenuJson(data){
+            var parsedJSON = JSON.parse(data);
+            console.log(parsedJSON)
+            for (var i=0;i<parsedJSON.length;i++) {
+                console.log(parsedJSON[i].CONTENT_);
+                document.getElementById('debugDietMenu2').innerHTML += " " + parsedJSON[i].CONTENT_;
+            }
+        }
+        function parseMedMenuJson(data){
+            var parsedJSON = JSON.parse(data);
+            console.log(parsedJSON)
+            for (var i=0;i<parsedJSON.length;i++) {
+                console.log(parsedJSON[i].CONTENT_);
+                document.getElementById('debugMedMenu2').innerHTML += " " + parsedJSON[i].CONTENT_;
+            }
+        }
+        function parseAlarmJson(data){
+            var parsedJSON = JSON.parse(data);
+            console.log(parsedJSON)
+            for (var i=0;i<parsedJSON.length;i++) {
+                console.log(parsedJSON[i].HOURMIN_);
+                document.getElementById('debugAlarm2').innerHTML += " " + parsedJSON[i].HOURMIN_;
+            }
+        }
+        function parseScheduleJson(data){
+            var parsedJSON = JSON.parse(data);
+            console.log(parsedJSON)
+            for (var i=0;i<parsedJSON.length;i++) {
+                console.log(parsedJSON[i].HOURMIN_);
+                document.getElementById('debugSchedule2').innerHTML += " " + parsedJSON[i].HOURMIN_ + " " + parsedJSON[i].CONTENT_;
+            }
+        }
+    </script>
+    <script>
+        URL = 'http://165.246.42.73:50080/DietMenu';
+        fetch(URL)
+        .then(res => res.text())
+        .then(text => {
+            document.getElementById('debugDietMenu').innerHTML = text;
+            console.log(parseDietMenuJson(text))
+            // console.log(text);
+        })
+        .catch(err => console.log(err));
+    </script>
+    <script>
+        URL = 'http://165.246.42.73:50080/MedMenu';
+        fetch(URL)
+        .then(res => res.text())
+        .then(text => {
+            document.getElementById('debugMedMenu').innerHTML = text;
+            console.log(parseMedMenuJson(text))
+            // console.log(text);
+        })
+        .catch(err => console.log(err));
+    </script>
+    <script>
+        URL = 'http://165.246.42.73:50080/Alarm';
+        fetch(URL)
+        .then(res => res.text())
+        .then(text => {
+            document.getElementById('debugAlarm').innerHTML = text;
+            console.log(parseAlarmJson(text))
+            // console.log(text);
+        })
+        .catch(err => console.log(err));
+    </script>
+    <script>
+        URL = 'http://165.246.42.73:50080/Schedule';
+        fetch(URL)
+        .then(res => res.text())
+        .then(text => {
+            document.getElementById('debugSchedule').innerHTML = text;
+            console.log(parseScheduleJson(text))
+            // console.log(text);
+        })
+        .catch(err => console.log(err));
+    </script>
   </body>
 </html>
