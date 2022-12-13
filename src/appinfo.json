@@ -1,6 +1,6 @@
 {
     "id": "com.inhadsp.smarthospital",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "vendor": "Taein Kim",
     "type": "web",
     "main": "index.html",
@@ -9,5 +9,8 @@
     "requiredPermissions": [
       "time.query",
       "activity.operation"
-    ]
+    ],
+    "allowVideoCapture": true,
+    "allowAudioCapture": true,
+    "enableWebOSVDA": true
   }
