@@ -3,7 +3,9 @@
 Simple webapp-based WebOS application
 
 ![App screenshot](app.png)
-
+![App demo 1](gif/app-demo-1.gif)
+![App demo 2](gif/app-demo-2-call-aid.gif)
+![App demo 4](gif/app-demo-4-call-contact.gif)
 
 ## Environment
 
