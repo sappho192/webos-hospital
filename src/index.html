@@ -8,7 +8,9 @@
     <link href="./css/vanillaCalendar.css" rel="stylesheet">
     <link href="./css/fontawesome.css" rel="stylesheet">
     <link href="./css/solid.css" rel="stylesheet">
-    <link href="./css/video.css" rel="stylesheet">
+    <!-- <link href="./css/video.css" rel="stylesheet"> -->
+    <script src="js/camera.js"></script>
+    <link href="response-window.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
@@ -371,10 +373,38 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <div class="booth">
-                  <video id="video" width="100%" autoplay=""></video>
-                  <canvas id="canvas" width="100%"></canvas>
-                </div>
+                <section class="section">
+                  <div class="tile is-ancestor">
+                    <!-- using media capture and stream API -->
+                    <div class="tile">
+                      <div class="tile is-parent is-vertical">
+                        <article class="tile box is-child">
+                          <video class="video_1" id="myVideo" autoPlay playsInline muted></video>
+                          <!-- <canvas  id="canvas" width="640" height="480"></canvas> -->
+                          <br>
+                          <button id="js-camera-play-btn" class="button is-success">
+                            <span class="icon is-medium">
+                              <i class="fa fa-play" aria-hidden="true"></i>
+                            </span>
+                            <p>통화 시작</p>
+                          </button>
+                          <button id="js-camera-stop-btn" class="button is-danger" disabled>
+                            <span class="icon is-medium">
+                              <i class="fa fa-stop" aria-hidden="true"></i>
+                            </span>
+                            <p>통화 종료</p>
+                          </button>
+                          <button id="js-camera-server-btn" class="button is-success" disabled hidden>
+                            <span class="icon is-medium">
+                              <i class="fa fa-play" aria-hidden="true"></i>
+                            </span>
+                            <p>Connect Server</p>
+                          </button>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+                </section>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기 [ESC]</button>

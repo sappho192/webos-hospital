@@ -6,6 +6,7 @@
     <title>스마트진료</title>
     <link href="./css/bootstrap.css" rel="stylesheet">
     <link href="./css/video.css" rel="stylesheet">
+    <script src="js/camera.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
@@ -29,11 +30,44 @@
       </nav>
     <div><h1> </h1></div>
 
-    <div class="booth">
+    <section class="section">
+      <div class="tile is-ancestor">
+        <!-- using media capture and stream API -->
+        <div class="tile">
+          <div class="tile is-parent is-vertical">
+            <article class="tile box is-child">
+              <video class="video_1" id="myVideo" autoPlay playsInline muted></video>
+              <!-- <canvas  id="canvas" width="640" height="480"></canvas> -->
+              <br>
+              <button id="js-camera-play-btn" class="button is-success">
+                <span class="icon is-medium">
+                  <i class="fa fa-play" aria-hidden="true"></i>
+                </span>
+                <p>통화 시작</p>
+              </button>
+              <button id="js-camera-stop-btn" class="button is-danger" disabled>
+                <span class="icon is-medium">
+                  <i class="fa fa-stop" aria-hidden="true"></i>
+                </span>
+                <p>통화 종료</p>
+              </button>
+              <button id="js-camera-server-btn" class="button is-success" disabled>
+                <span class="icon is-medium">
+                  <i class="fa fa-play" aria-hidden="true"></i>
+                </span>
+                <p>Connect Server</p>
+              </button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <div class="booth">
         <video id="video" width="1280" height="720" autoplay=""></video>
         <canvas id="canvas" width="1280" height="720"></canvas>
     </div>
-    <script src="./js/video.js"></script>
+    <script src="./js/video.js"></script> -->
 
     <div class="card" hidden>
         <h5 class="card-header">Debug - REST API with JSON</h5>
